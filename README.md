@@ -39,22 +39,22 @@ Although this project targets the Avnet MiniZed, the concepts transfer to just a
 1. cd to a place where you have 20GB available
 
 1. Clone the repo
-```sh
-> git clone https://github.com/ad0rx/mz_stream_petalinux_2017.4.git mz_stream_petalinux --depth 1
-```
+   ```sh
+   > git clone https://github.com/ad0rx/mz_stream_petalinux_2017.4.git mz_stream_petalinux --depth 1
+   ```
 
 1. If you are going to develop with intent to submit patches back to master branch, 
    consider creating a local branch
 
 1. Change to directory just created by git
-```sh
-> cd mz_stream_petalinux
-```
+   ```sh
+   > cd mz_stream_petalinux
+   ```
 
 5. Set PROJWS
-```sh
-> export PROJWS=$(pwd)
-```
+   ```sh
+   > export PROJWS=$(pwd)
+   ```
 
 1. Edit bin/setup.sh
    - replace occurances of 'myhostname' with the host name of your machine as reported by 'hostname'
@@ -109,7 +109,7 @@ Although this project targets the Avnet MiniZed, the concepts transfer to just a
      > . bin/setup_ssh.sh
      ```
 
-   * Once you have built the SDx Application Project, there will be files in the sd_card directory that must be uploaded to the board. These files are located at ${PROJWS}/work/sdx_application_project/mz_stream_petalinux/Debug/sd_card
+   - Once you have built the SDx Application Project, there will be files in the sd_card directory that must be uploaded to the board. These files are located at ${PROJWS}/work/sdx_application_project/mz_stream_petalinux/Debug/sd_card
 
      1. BOOT.BIN
      1. image.ub

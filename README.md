@@ -23,6 +23,8 @@ By running the automated scripts, you will be able to choose any area of interes
 
 Along with the automated build scripts are a few helper scripts containing tips and tricks which are generally applicable to just about any development board that runs Linux. For example, the bin/setup_ssh.sh and bin/upload.sh scripts.
 
+Although this project targets the Avnet MiniZed, the concepts transfer to just about any Zynq and Zynq UltraScale (MPSoC) based development board.
+
 # Prerequisites
 
 1. Xilinx SDx 2017.4 

@@ -7,7 +7,7 @@
 #
 # Still in experimental state...
 
-#set -e
+set -e
 ME="gen_sdx_application_project.sh"
 
 if [ -z ${PROJWS} ]

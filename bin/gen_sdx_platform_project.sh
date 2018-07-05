@@ -21,10 +21,10 @@ fi
 P_PRINT ${ME} "Running\n"
 
 # Create app dir if not there already
-if [ ! -e "${PROJ_SDX_APP_PROJECT_PATH}" ]
-then
-    mkdir -p "${PROJ_SDX_APP_PROJECT_PATH}"
-fi
+#if [ ! -e "${PROJ_SDX_APP_PROJECT_PATH}" ]
+#then
+#    mkdir -p "${PROJ_SDX_APP_PROJECT_PATH}"
+#fi
 
 # Make sure to get a clean build
 if [ -e "${PROJ_SDX_PFM_PROJECT_PATH}" ]

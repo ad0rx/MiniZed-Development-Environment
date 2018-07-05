@@ -85,11 +85,11 @@ Although this project targets the Avnet MiniZed, the concepts transfer to just a
    
 1. Create the SDx application project
    1. Source the settings for SDx and start SDx Tool
-   ```sh
-   > $SSDX
-   > cd work/
-   > sdx -workspace sdx_application_project
-   ```
+      ```sh
+      > $SSDX
+      > cd work/
+      > sdx -workspace sdx_application_project
+      ```
    
    1. File -> New -> SDx Project -> Application Project
    1. Name: mz_stream_petalinux
@@ -104,28 +104,29 @@ Although this project targets the Avnet MiniZed, the concepts transfer to just a
    1. Build the project
    
 1. Deploy Files to MiniZed
+   1. Source the SSH setup file
+     ```sh
+     > . bin/setup_ssh.sh
+     ```
 
    * Once you have built the SDx Application Project, there will be files in the sd_card directory that must be uploaded to the board. These files are located at ${PROJWS}/work/sdx_application_project/mz_stream_petalinux/Debug/sd_card
 
-   1. BOOT.BIN
-   1. image.ub
-   1. mz_stream_petalinux.elf
+     1. BOOT.BIN
+     1. image.ub
+     1. mz_stream_petalinux.elf
+     
+   1. Upload files to MiniZed
+      ```sh
+      > upload.sh
+      ```
 
-   * There is a helper script, bin/upload.sh which can be used to upload the files automatically. The script assumes that the MiniZed is booted into Linux and the wifi.sh script has been executed on the board such that the MiniZed has joined a wireless network. Also, the environmet variable 'MZ_IP' must hold the IPv4 address of the board, for example '192.168.1.16'. The MZ_IP variable is set in bin/setup.sh. By examining the bin/upload.sh script, one can see examples of uploading files to the MiniZed over SCP in the case that the automated script is unsuitable.
-
-1. Program BOOT.BIN into QSPI   
-```sh
-MZ> flashcp /mnt/emmc/BOOT.BIN /dev/mtd0
-```
-
-1. Run the Application
-If you have setup the MZ_IP in bin/setup.sh, then you may source the bin/setup_ssh.sh file which will enable easier logins to the board by setting up public key authentication between the development host and the MiniZed. Again, the following steps assume that the board is booted into Linux and the wifi.sh script has been executed.
-
-   1. Source the SSH setup file
+1. Program BOOT.BIN into QSPI and reboot the board
    ```sh
-   > . bin/setup_ssh.sh
+   > mzssh flashcp /mnt/emmc/BOOT.BIN /dev/mtd0
+   > mzssh /sbin/reboot
    ```
-   2. Execute the program over SSH fron the development host
+
+1. Run the Application over SSH fron the development host
    ```sh
    > mzssh /mnt/emmt/mz_stream_petalinux.elf
    ```

@@ -1,0 +1,44 @@
+# The t arg allocates a tty, and allows reboot
+# command to be run from the remote host
+ssh -t root@192.168.1.16 /mnt/emmc/update.sh
+
+petalinux-package --boot --fsbl images/linux/zynq_fsbl.elf --fpga images/linux/minized_petalinux_wrapper.bit --u-boot images/linux/u-boot.elf --force
+
+# Git
+Centralized Workflow model for now.
+https://www.atlassian.com/git/tutorials/comparing-workflows#centralized-workflow
+
+# Check to see if there are changes in origin
+# compared to local remo
+git remote update
+git status -uno
+
+# Simple Git Workflow
+1. pull from master
+> git clone <git repo URL>
+
+2. create a local branch
+> git checkout -b myfeature
+
+3. Do your edits
+   Edits made to files under work/ will be lost,
+   be sure to save the files outside of work/
+   
+4. Commit your local changes to the local repo
+> git commit <file>
+
+5. Switch back to master branch and update
+> git checkout master
+> git pull origin master
+
+6. Merge the local branch back into master
+> git merge myfeature
+
+7. Run scripts to make sure nothing broke
+> top.sh
+
+8. Commit to the main repo on github
+> git push origin master
+
+9. Delete local branch
+> git branch -d myfeature

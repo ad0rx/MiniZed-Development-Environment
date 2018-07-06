@@ -31,6 +31,6 @@ gen_sdx_platform_project.sh
 
 # Generate the sdx application project
 # Still in Beta
-#gen_sdx_application_project.sh
+gen_sdx_application_project.sh
 
 P_PRINT ${ME} "Exiting\n"

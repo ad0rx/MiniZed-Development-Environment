@@ -95,9 +95,9 @@ Although this project targets the Avnet MiniZed, the concepts transfer to just a
    - The following steps assume that the board has booted into Linux, the wifi.sh script has been executed on the board, and you have set the IP of the board in bin/setup.sh MZ_IP variable. Once you source the bin/setup_ssh.sh file, the mzssh command will be available to you and allows you to log into the board without having to provide an interactive password. The bin/setup_ssh.sh file configures public key authentication.
 
    1. Source the SSH setup file
-     ```sh
-     > . bin/setup_ssh.sh
-     ```
+      ```sh
+      > . bin/setup_ssh.sh
+      ```
 
    - Once you have built the SDx Application Project, there will be files in the sd_card directory that must be uploaded to the board. These files are located at ${PROJWS}/work/sdx_application_project/mz_stream_petalinux/Debug/sd_card
 

@@ -77,40 +77,27 @@ Although this project targets the Avnet MiniZed, the concepts transfer to just a
      > gen_hardware_project.sh
      > gen_petalinux_project.sh
      > gen_sdx_platform_project.sh
+     > gen_sdx_application_project.sh
      ```
 
-   - When the menuconfig for petalinux pops up during the
+   - \* When the menuconfig for petalinux pops up during the
      gen_petalinux_project.sh script, exit without making any
      changes. Select YES to save new configuration
+
+   - Once the gen_sdx_application_project.sh script completes, SDx will automatically open
    
-1. Create the SDx application project
-   1. Source the settings for SDx and start SDx Tool
-      ```sh
-      > $SSDX
-      > cd work/
-      > sdx -workspace sdx_application_project
-      ```
-   
-   1. File -> New -> SDx Project -> Application Project
-   1. Name: mz_stream_petalinux
-   1. Add Custom Platform
-      * ${PROJWS}/work/sdx_platform_project/
-      * Next -> Next -> Finish
-   1. Properties -> C++ Build -> Behavior -> Enable Parallel Build -> optimal
-   1. Right click src folder -> Import -> General -> File System
-      * ${PROJWS}/support/sdx/src
-   1. Enable read_stream as hardware function
-   1. Setup Linux TCF Agent as needed
-   1. Build the project
+1. Build the SDx Application
+
+   - Project -> Build All or CTRL+B
    
 1. Deploy Files to MiniZed
 
-   - The following steps assume that the board is booting into Linux, and you have set the IP of the board in bin/setup.sh MZ_IP variable. Once you source the bin/setup_ssh.sh file, the mzssh command will be available to you and allows you to log into the board without having to provide an interactive password. The bin/setup_ssh.sh file configures public key authentication for you.
+   - The following steps assume that the board has booted into Linux, the wifi.sh script has been executed on the board, and you have set the IP of the board in bin/setup.sh MZ_IP variable. Once you source the bin/setup_ssh.sh file, the mzssh command will be available to you and allows you to log into the board without having to provide an interactive password. The bin/setup_ssh.sh file configures public key authentication.
 
    1. Source the SSH setup file
-     ```sh
-     > . bin/setup_ssh.sh
-     ```
+      ```sh
+      > . bin/setup_ssh.sh
+      ```
 
    - Once you have built the SDx Application Project, there will be files in the sd_card directory that must be uploaded to the board. These files are located at ${PROJWS}/work/sdx_application_project/mz_stream_petalinux/Debug/sd_card
 

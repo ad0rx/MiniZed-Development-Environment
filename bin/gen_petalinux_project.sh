@@ -51,7 +51,7 @@ clear; echo; echo "*** Importing New HDF ***"; echo
 echo "When the menuconfig pops up - exit without making changes"; echo
 sleep 5
 petalinux-config -p ${PETALINUX_PROJECT_NAME} \
-  --get-hw-description=${HDF_PATH}
+  --get-hw-description=${HDF_PATH} --oldconfig
 
 # Add custom dtsi file which enables APF driver for SDx
 cp ${PROJWS}/support/petalinux/system-user.dtsi \

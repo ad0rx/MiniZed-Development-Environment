@@ -3,11 +3,6 @@
 # environment variables
 #
 
-#ME="setup.sh"
-
-# IP of the MiniZed
-export MZ_IP=192.168.1.16
-
 # Can't do this because this file gets sourced from various other
 # places. Must set PROJWS before calling this
 #export PROJWS=$(pwd)
@@ -48,6 +43,9 @@ if [ "$HOSTNAME" = "bubba" ]
 then
 
     P_PRINT "setup.sh" "Applying Environment Settings for Bubba"
+
+    # IP of the MiniZed
+    export MZ_IP=192.168.1.16
     export PROJ_NUM_CPU=4
     PETALINUX_SETTINGS=/projects/xilinx_no_bkup/petalinux/2017.4/settings.sh
 
@@ -61,6 +59,9 @@ else if [ "$HOSTNAME" = "myhostname" ]
      then
 
          P_PRINT "setup.sh" "Applying Environment Settings for myhostname"
+         
+         # IP of the MiniZed
+         export MZ_IP=192.168.1.16         
          export PROJ_NUM_CPU=4
          PETALINUX_SETTINGS=<>/2017.4/settings.sh
 

@@ -67,7 +67,7 @@ Although this project targets the Avnet MiniZed, the concepts transfer to just a
    ```
 
 1. Run the top level script which will build everything required by the final
-   SDx application that we will run*
+   SDx application that we will run
    ```sh
    > top.sh
    ```
@@ -79,11 +79,6 @@ Although this project targets the Avnet MiniZed, the concepts transfer to just a
      > gen_sdx_platform_project.sh
      > gen_sdx_application_project.sh
      ```
-
-   - \* When the menuconfig for petalinux pops up during the
-     gen_petalinux_project.sh script, exit without making any
-     changes. Select YES to save new configuration
-
    - Once the gen_sdx_application_project.sh script completes, SDx will automatically open
    
 1. Build the SDx Application
@@ -92,7 +87,7 @@ Although this project targets the Avnet MiniZed, the concepts transfer to just a
    
 1. Deploy Files to MiniZed
 
-   - The following steps assume that the board has booted into Linux, the wifi.sh script has been executed on the board, and you have set the IP of the board in bin/setup.sh MZ_IP variable. Once you source the bin/setup_ssh.sh file, the mzssh command will be available to you and allows you to log into the board without having to provide an interactive password. The bin/setup_ssh.sh file configures public key authentication.
+   - The following steps assume that the board has booted into Linux, the wifi.sh script has been executed on the board, and you have set the IP of the board in bin/setup.sh MZ_IP variable. Once you source the bin/setup_ssh.sh file, the mzssh command will be available to you and allows you to log into the board without having to provide an interactive password. The bin/setup_ssh.sh file configures public key authentication. You will be asked to connect to the board only once per board reboot.
 
    1. Source the SSH setup file
       ```sh
@@ -112,7 +107,7 @@ Although this project targets the Avnet MiniZed, the concepts transfer to just a
 
 1. Program BOOT.BIN into QSPI and reboot the board
    ```sh
-   > mzssh flashcp /mnt/emmc/BOOT.BIN /dev/mtd0
+   > mzssh /usr/sbin/flashcp /mnt/emmc/BOOT.BIN /dev/mtd0
    > mzssh /sbin/reboot
    ```
 

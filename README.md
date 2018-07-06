@@ -39,22 +39,22 @@ Although this project targets the Avnet MiniZed, the concepts transfer to just a
 1. cd to a place where you have 20GB available
 
 1. Clone the repo
-```sh
-> git clone https://github.com/ad0rx/mz_stream_petalinux_2017.4.git mz_stream_petalinux --depth 1
-```
+   ```sh
+   > git clone https://github.com/ad0rx/mz_stream_petalinux_2017.4.git mz_stream_petalinux --depth 1
+   ```
 
 1. If you are going to develop with intent to submit patches back to master branch, 
    consider creating a local branch
 
 1. Change to directory just created by git
-```sh
-> cd mz_stream_petalinux
-```
+   ```sh
+   > cd mz_stream_petalinux
+   ```
 
 5. Set PROJWS
-```sh
-> export PROJWS=$(pwd)
-```
+   ```sh
+   > export PROJWS=$(pwd)
+   ```
 
 1. Edit bin/setup.sh
    - replace occurances of 'myhostname' with the host name of your machine as reported by 'hostname'
@@ -85,11 +85,11 @@ Although this project targets the Avnet MiniZed, the concepts transfer to just a
    
 1. Create the SDx application project
    1. Source the settings for SDx and start SDx Tool
-   ```sh
-   > $SSDX
-   > cd work/
-   > sdx -workspace sdx_application_project
-   ```
+      ```sh
+      > $SSDX
+      > cd work/
+      > sdx -workspace sdx_application_project
+      ```
    
    1. File -> New -> SDx Project -> Application Project
    1. Name: mz_stream_petalinux
@@ -102,14 +102,36 @@ Although this project targets the Avnet MiniZed, the concepts transfer to just a
    1. Enable read_stream as hardware function
    1. Setup Linux TCF Agent as needed
    1. Build the project
-   1. Deploy files under sd_card to MiniZed (see next section)
    
-# Deploying Files to MiniZed
+1. Deploy Files to MiniZed
 
-Once you have built the SDx Application Project, there will be files in the sd_card directory that must be uploaded to the board. These files are located at ${PROJWS}/work/sdx_application_project/mz_stream_petalinux/Debug/sd_card
+   - The following steps assume that the board is booting into Linux, and you have set the IP of the board in bin/setup.sh MZ_IP variable. Once you source the bin/setup_ssh.sh file, the mzssh command will be available to you and allows you to log into the board without having to provide an interactive password. The bin/setup_ssh.sh file configures public key authentication for you.
 
-1. BOOT.BIN
-1. image.ub
-1. mz_stream_petalinux.elf
+   1. Source the SSH setup file
+     ```sh
+     > . bin/setup_ssh.sh
+     ```
 
-There is a helper script, bin/upload.sh which can be used to upload the files automatically. The script assumes that the MiniZed is booted into Linux and the wifi.sh script has been executed on the board such that the MiniZed has joined a wireless network. Also, the environmet variable 'MZ_IP' must hold the IPv4 address of the board, for example '192.168.1.16'. The MZ_IP variable is set in bin/setup.sh. By examining the bin/upload.sh script, one can see examples of uploading files to the MiniZed over SCP in the case that the automated script is unsuitable.
+   - Once you have built the SDx Application Project, there will be files in the sd_card directory that must be uploaded to the board. These files are located at ${PROJWS}/work/sdx_application_project/mz_stream_petalinux/Debug/sd_card
+
+     1. BOOT.BIN
+     1. image.ub
+     1. mz_stream_petalinux.elf
+     
+   1. Upload files to MiniZed
+      ```sh
+      > upload.sh
+      ```
+
+1. Program BOOT.BIN into QSPI and reboot the board
+   ```sh
+   > mzssh flashcp /mnt/emmc/BOOT.BIN /dev/mtd0
+   > mzssh /sbin/reboot
+   ```
+
+1. Run the Application over SSH fron the development host
+   ```sh
+   > mzssh /mnt/emmt/mz_stream_petalinux.elf
+   ```
+   
+1. Celebrate a well earned victory!

@@ -4,7 +4,7 @@
 * Provide a method to quickly experiment with the Xilinx SDSoC Tool
 * Serve as example projects to demonstrate common embedded Linux tasks
   * User Space IO (UIO)
-* Quick start for any project targetting Avnet MiniZed SoC development board
+* Quick start for any project targeting Avnet MiniZed SoC development board
 * Demonstrate how to automate Xilinx tool flows and common support tasks
 * Demonstrate how to use revision control for large projects by tracking only source code and build scripts
 

@@ -12,13 +12,13 @@
 * Add PetaLinux examples
   1. Kernal char driver
 * Migrate to a generic environment that supports many Avnet and Xilinx boads
-  * Xilinx
-    1. ZC702
-    1. ZCU102
   * Avnet
     1. MicroZed
     1. PicoZed
     1. UltraZed
+  * Xilinx
+    1. ZC702
+    1. ZCU102    
 * Convert Bash scripts to Perl to enable Windows users to take advantages of pieces of this project    
 
 # Summary

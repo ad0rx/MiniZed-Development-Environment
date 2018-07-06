@@ -1,7 +1,7 @@
 # MiniZed Development Environment v2017.4
 
 # Completed Goals 
-* Provide a method to quickly experiment with Xilinx SDSoC (a.k.a. SDSoC) Tool
+* Provide a method to quickly experiment with the Xilinx SDSoC Tool
 * Serve as example projects to demonstrate common embedded Linux tasks
   * User Space IO (UIO)
 * Quick start for any project targetting Avnet MiniZed SoC development board
@@ -19,7 +19,7 @@
     1. MicroZed
     1. PicoZed
     1. UltraZed
-* Conver Bash scripts to Perl to enable Windows users to take advantages of pieces of this project    
+* Convert Bash scripts to Perl to enable Windows users to take advantages of pieces of this project    
 
 # Summary
 The culminating capability of this project is the ability to start developing a Xilinx SDSoC application, with streaming IO (DMA) and a practical hardware reference design. This project provides a collection of scripts and supporing files which enable you to quickly develop applications for the Avnet MiniZed development board. The current automation supports generation of the following:
@@ -39,14 +39,16 @@ Although this project targets the Avnet MiniZed, the concepts transfer to just a
 
 # Prerequisites
 
-1. Xilinx SDSoC 2017.4 
-   - includes Vivado
+1. Xilinx SDx 2017.4 
+   - Includes Vivado
    
 1. PetaLinux 2017.4 
 
 1. Licenses sufficient to target XC7Z007S part
 
-# Getting Started With SDSoC
+# Getting Started with SDSoC Project
+
+The following steps explain how to use this environment to build everything required to run a SDSoC application on the MiniZed board.
 
 1. cd to a place where you have 20GB available
 
@@ -123,9 +125,9 @@ Although this project targets the Avnet MiniZed, the concepts transfer to just a
    > mzssh /sbin/reboot
    ```
 
-1. Run the Application over SSH fron the development host
+1. Run the Application
    ```sh
    > mzssh /mnt/emmt/mz_stream_petalinux.elf
    ```
    
-1. Celebrate a well earned victory!
+1. Congratulations, you now have one of the most powerful SoC development tools at your command, please enjoy responsibly!

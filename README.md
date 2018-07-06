@@ -1,7 +1,7 @@
 # MiniZed Development Environment v2017.4
 
 # Completed Goals 
-* Provide a method to quickly experiment with Xilinx SDx (a.k.a. SDSoC) Tool
+* Provide a method to quickly experiment with Xilinx SDSoC (a.k.a. SDSoC) Tool
 * Serve as example projects to demonstrate common embedded Linux tasks
   * User Space IO (UIO)
 * Quick start for any project targetting Avnet MiniZed SoC development board
@@ -22,13 +22,13 @@
 * Conver Bash scripts to Perl to enable Windows users to take advantages of pieces of this project    
 
 # Summary
-The culminating capability of this project is the ability to start developing a Xilinx SDx application, with streaming IO (DMA) and a practical hardware reference design. This project provides a collection of scripts and supporing files which enable you to quickly develop applications for the Avnet MiniZed development board. The current automation supports generation of the following:
+The culminating capability of this project is the ability to start developing a Xilinx SDSoC application, with streaming IO (DMA) and a practical hardware reference design. This project provides a collection of scripts and supporing files which enable you to quickly develop applications for the Avnet MiniZed development board. The current automation supports generation of the following:
 
 1. Vivado Hardware Project
    1. Custom AXI Counter IP example (VHDL)
 1. PetaLinux Distribution Project
    1. UIO Driver link to AXI Counter IP
-1. SDx Platform Project
+1. SDSoC Platform Project
    1. Streaming IO Application (DMA) with UIO API to custom hardware control registers
    
 By running the scripts, you will be able to choose any area of interest and not have to start from scratch, and this enables you to focus on what matters to you today. If you are interested in seeing how the projects are architected, the information is contained in the included Bash and Tcl scripts.  
@@ -39,7 +39,7 @@ Although this project targets the Avnet MiniZed, the concepts transfer to just a
 
 # Prerequisites
 
-1. Xilinx SDx 2017.4 
+1. Xilinx SDSoC 2017.4 
    - includes Vivado
    
 1. PetaLinux 2017.4 
@@ -79,7 +79,7 @@ Although this project targets the Avnet MiniZed, the concepts transfer to just a
    ```
 
 1. Run the top level script which will build everything required by the final
-   SDx application that we will run
+   SDSoC application that we will run
    ```sh
    > top.sh
    ```
@@ -91,9 +91,9 @@ Although this project targets the Avnet MiniZed, the concepts transfer to just a
      > gen_sdx_platform_project.sh
      > gen_sdx_application_project.sh
      ```
-   - Once the gen_sdx_application_project.sh script completes, SDx will automatically open
+   - Once the gen_sdx_application_project.sh script completes, SDSoC will automatically open
    
-1. Build the SDx Application
+1. Build the SDSoC Application
 
    - Project -> Build All or CTRL+B
    
@@ -106,7 +106,7 @@ Although this project targets the Avnet MiniZed, the concepts transfer to just a
       > . bin/setup_ssh.sh
       ```
 
-   - Once you have built the SDx Application Project, there will be files in the sd_card directory that must be uploaded to the board. These files are located at ${PROJWS}/work/sdx_application_project/mz_stream_petalinux/Debug/sd_card
+   - Once you have built the SDSoC Application Project, there will be files in the sd_card directory that must be uploaded to the board. These files are located at ${PROJWS}/work/sdx_application_project/mz_stream_petalinux/Debug/sd_card
 
      1. BOOT.BIN
      1. image.ub

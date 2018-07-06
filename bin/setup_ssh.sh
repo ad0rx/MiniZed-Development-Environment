@@ -55,6 +55,6 @@ then
     #ssh-copy-id -o UserKnownHostsFile=${PROJ_SSH_PATH}/known_hosts -i "${PROJ_SSH_PATH}/id_rsa" root@${MZ_IP} 
 fi
 
-alias mzssh="${MZ_SSH}"
+alias mzssh=". ${PROJWS}/bin/setup_ssh.sh && ${MZ_SSH}"
 
 P_PRINT ${ME} "Exiting\n"

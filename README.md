@@ -1,13 +1,25 @@
-# MiniZed Development Environment 2017.4
+# MiniZed Development Environment v2017.4
 
-# Goals 
+# Completed Goals 
 * Provide a method to quickly experiment with Xilinx SDx (a.k.a. SDSoC) Tool
 * Serve as example projects to demonstrate common embedded Linux tasks
-  * User Space IO (UIO) (Done)
-  * Kernel char driver  (In Progress)
+  * User Space IO (UIO)
 * Quick start for any project targetting Avnet MiniZed SoC development board
 * Demonstrate how to automate Xilinx tool flows and common support tasks
 * Demonstrate how to use revision control for large projects by tracking only source code and build scripts
+
+# Future Goals
+* Add PetaLinux examples
+  1. Kernal char driver
+* Migrate to a generic environment that supports many Avnet and Xilinx boads
+  * Xilinx
+    1. ZC702
+    1. ZCU102
+  * Avnet
+    1. MicroZed
+    1. PicoZed
+    1. UltraZed
+* Conver Bash scripts to Perl to enable Windows users to take advantages of pieces of this project    
 
 # Summary
 The culminating capability of this project is the ability to start developing a Xilinx SDx application, with streaming IO (DMA) and a practical hardware reference design. This project provides a collection of scripts and supporing files which enable you to quickly develop applications for the Avnet MiniZed development board. The current automation supports generation of the following:
@@ -19,7 +31,7 @@ The culminating capability of this project is the ability to start developing a 
 1. SDx Platform Project
    1. Streaming IO Application (DMA) with UIO API to custom hardware control registers
    
-By running the automated scripts, you will be able to choose any area of interest and not have to start from scratch. This enables you to focus on what matters to you today. If you are interested in seeing how the projects are architected, the information is contained in the included Bash and Tcl scripts.  
+By running the scripts, you will be able to choose any area of interest and not have to start from scratch, and this enables you to focus on what matters to you today. If you are interested in seeing how the projects are architected, the information is contained in the included Bash and Tcl scripts.  
 
 Along with the automated build scripts are a few helper scripts containing tips and tricks which are generally applicable to just about any development board that runs Linux. For example, the bin/setup_ssh.sh and bin/upload.sh scripts.
 
@@ -34,7 +46,7 @@ Although this project targets the Avnet MiniZed, the concepts transfer to just a
 
 1. Licenses sufficient to target XC7Z007S part
 
-# Getting Started
+# Getting Started With SDSoC
 
 1. cd to a place where you have 20GB available
 

@@ -48,7 +48,6 @@ petalinux-create -t project -s ${PROJ_PLNX_PROJECT_PATH}/${BSP} \
 
 # Import the new hardware definition
 clear; echo; echo "*** Importing New HDF ***"; echo
-echo "When the menuconfig pops up - exit without making changes"; echo
 sleep 5
 petalinux-config -p ${PETALINUX_PROJECT_NAME} \
   --get-hw-description=${HDF_PATH} --oldconfig

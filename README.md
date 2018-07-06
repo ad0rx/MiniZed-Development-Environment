@@ -104,6 +104,9 @@ Although this project targets the Avnet MiniZed, the concepts transfer to just a
    1. Build the project
    
 1. Deploy Files to MiniZed
+
+   - The following steps assume that the board is booting into Linux, and you have set the IP of the board in bin/setup.sh MZ_IP variable. Once you source the bin/setup_ssh.sh file, the mzssh command will be available to you and allows you to log into the board without having to provide an interactive password. The bin/setup_ssh.sh file configures public key authentication for you.
+
    1. Source the SSH setup file
      ```sh
      > . bin/setup_ssh.sh

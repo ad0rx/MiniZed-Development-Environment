@@ -1,5 +1,9 @@
 #!/bin/sh
-
+#
+# This script, when saved to /mnt/emmc/user_minized_init.sh
+# will be called by the custom minized-mount.sh script at
+# boot time
+#
 # Assumed the peekpoke application exists in the distro
 # could use native devmem application instead
 

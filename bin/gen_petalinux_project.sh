@@ -53,25 +53,25 @@ petalinux-config -p ${PETALINUX_PROJECT_NAME} \
   --get-hw-description=${HDF_PATH} --oldconfig
 
 # Add custom dtsi file which enables APF driver for SDx
-cp ${PROJWS}/support/petalinux/system-user.dtsi \
+cp ${PROJWS}/support/petalinux/minized/system-user.dtsi \
    ${PETALINUX_PROJECT_NAME}/project-spec/meta-user/recipes-bsp/device-tree/files/system-user.dtsi
 
 # Disable all unnecessry components as they are not needed for basic SDx demo
-cp ${PROJWS}/support/petalinux/petalinux-user-image.bbappend \
+cp ${PROJWS}/support/petalinux/minized/petalinux-user-image.bbappend \
    ${PETALINUX_PROJECT_NAME}/project-spec/meta-user/recipes-core/images/
 
 # Fix build error related to brcmfmac43430-sdio.bin
-cp ${PROJWS}/support/petalinux/minized-wireless_2017.4.bb \
+cp ${PROJWS}/support/petalinux/minized/minized-wireless_2017.4.bb \
    ${PETALINUX_PROJECT_NAME}/project-spec/meta-user/recipes-bsp/minized-wireless/minized-wireless_2017.4.bb
 
 # Add custom minized-mount.sh script which calls
 # /mnt/emmc/user_minized_init.sh
-cp ${PROJWS}/support/petalinux/minized-mount.sh \
+cp ${PROJWS}/support/petalinux/minized/minized-mount.sh \
    ${PETALINUX_PROJECT_NAME}/project-spec/meta-user/recipes-bsp/minized-misc/files
 
 clear; echo; echo "*** Configuring Kernel Per UG1146 ***"; echo
 sleep 5
-cp ${PROJWS}/support/petalinux/sdx_kernel_configs.cfg \
+cp ${PROJWS}/support/petalinux/minized/sdx_kernel_configs.cfg \
    ${PETALINUX_PROJECT_NAME}/project-spec/meta-user/recipes-kernel/linux/linux-xlnx/user_sdx.cfg
 echo 'SRC_URI += "file://user_sdx.cfg"' >> \
   ${PETALINUX_PROJECT_NAME}/project-spec/meta-user/recipes-kernel/linux/linux-xlnx_%.bbappend
@@ -79,7 +79,7 @@ petalinux-config -p ${PETALINUX_PROJECT_NAME} -c kernel --oldconfig
 
 clear; echo; echo "*** Configuring Rootfs Per UG1146 ***"; echo
 sleep 5
-cp ${PROJWS}/support/petalinux/rootfs_config \
+cp ${PROJWS}/support/petalinux/minized/rootfs_config \
    ${PETALINUX_PROJECT_NAME}/project-spec/configs/rootfs_config
 petalinux-config -p ${PETALINUX_PROJECT_NAME} -c rootfs --oldconfig
 
@@ -101,7 +101,7 @@ cp    ${PETALINUX_PROJECT_NAME}/images/linux/*fsbl.elf  \
 cp    ${PETALINUX_PROJECT_NAME}/images/linux/image.ub   \
       ${PETALINUX_PROJECT_NAME}/images/linux/image/image.ub
 
-cp    ${PROJWS}/support/petalinux/sdx_pfm.bif           \
+cp    ${PROJWS}/support/petalinux/minized/sdx_pfm.bif   \
       ${PETALINUX_PROJECT_NAME}/images/linux/boot/sdx_pfm.bif
 
 # might need to reset the board using reset button before able to connect

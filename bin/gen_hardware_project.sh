@@ -39,6 +39,6 @@ ${SSDX}
 
 # Build the project using Vivado batch tcl mode
 cd "${PROJ_HW_PROJECT_PATH}"
-vivado -mode batch -source "${PROJWS}/support/vivado/generate_vivado_project.tcl"
+vivado -mode batch -source "${PROJWS}/support/vivado/minized/generate_vivado_project.tcl"
 
 P_PRINT ${ME} "Exiting\n"

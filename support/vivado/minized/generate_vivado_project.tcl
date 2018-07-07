@@ -104,7 +104,7 @@ set obj [get_filesets sources_1]
 set PROJ_HW_PROJECT_PATH $::env(PROJ_HW_PROJECT_PATH)
 file copy "$PROJ_HW_PROJECT_PATH/support/axi_counter_ip" "$PROJ_HW_PROJECT_PATH/$project_name/minized_petalinux.ip_user_files"
 
-set files "$PROJWS/support/vivado/wireless_mgr.vhd"
+set files "$PROJWS/support/vivado/minized/wireless_mgr.vhd"
 set imported_files [import_files -fileset sources_1 $files]
 # END BDW
 
@@ -112,7 +112,7 @@ set imported_files [import_files -fileset sources_1 $files]
 # None
 
 # Set 'sources_1' fileset file properties for local files
-set file "vivado/wireless_mgr.vhd"
+set file "minized/wireless_mgr.vhd"
 set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
 set_property -name "file_type" -value "VHDL" -objects $file_obj
 
@@ -130,23 +130,23 @@ set obj [get_filesets constrs_1]
 
 # BDW
 # Add/Import constrs file and set constrs file properties
-set file "[file normalize "$PROJWS/support/vivado/minized_LEDs.xdc"]"
+set file "[file normalize "$PROJWS/support/vivado/minized/minized_LEDs.xdc"]"
 set file_imported [import_files -fileset constrs_1 $file]
-set file "vivado/minized_LEDs.xdc"
+set file "minized/minized_LEDs.xdc"
 set file_obj [get_files -of_objects [get_filesets constrs_1] [list "*$file"]]
 set_property -name "file_type" -value "XDC" -objects $file_obj
 
 # Add/Import constrs file and set constrs file properties
-set file "[file normalize "$PROJWS/support/vivado/bitstream_compression_enable.xdc"]"
+set file "[file normalize "$PROJWS/support/vivado/minized/bitstream_compression_enable.xdc"]"
 set file_imported [import_files -fileset constrs_1 $file]
-set file "vivado/bitstream_compression_enable.xdc"
+set file "minized/bitstream_compression_enable.xdc"
 set file_obj [get_files -of_objects [get_filesets constrs_1] [list "*$file"]]
 set_property -name "file_type" -value "XDC" -objects $file_obj
 
 # Add/Import constrs file and set constrs file properties
-set file "[file normalize "$PROJWS/support/vivado/minized_petalinux.xdc"]"
+set file "[file normalize "$PROJWS/support/vivado/minized/minized_petalinux.xdc"]"
 set file_imported [import_files -fileset constrs_1 $file]
-set file "vivado/minized_petalinux.xdc"
+set file "minized/minized_petalinux.xdc"
 set file_obj [get_files -of_objects [get_filesets constrs_1] [list "*$file"]]
 set_property -name "file_type" -value "XDC" -objects $file_obj
 # END BDW
@@ -170,7 +170,7 @@ set_property -name "top" -value "minized_petalinux_wrapper" -objects $obj
 
 # Adding sources referenced in BDs, if not already added
 if { [get_files wireless_mgr.vhd] == "" } {
-  import_files -quiet -fileset sources_1 /projects/minized/2017.4/mz_stream_petalinux/work/hardware_project/minized_petalinux/minized_petalinux.srcs/sources_1/imports/vivado/wireless_mgr.vhd
+  import_files -quiet -fileset sources_1 /projects/minized/2017.4/mz_stream_petalinux/work/hardware_project/minized_petalinux/minized_petalinux.srcs/sources_1/imports/vivado/minized/wireless_mgr.vhd
 }
 
 
@@ -1042,7 +1042,7 @@ update_compile_order -fileset sources_1
 update_compile_order -fileset sources_1
 
 # Setup interfaces SDx
-source $PROJWS/support/vivado/mz_stream_petalinux_pfm.tcl
+source $PROJWS/support/vivado/minized/mz_stream_petalinux_pfm.tcl
 
 save_bd_design
 

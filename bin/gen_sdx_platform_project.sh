@@ -38,6 +38,6 @@ cd "${PROJ_SDX_PFM_PROJECT_PATH}"
 ${SSDX}
 
 # Use xsct to run the tcl script
-${XSCT} ${PROJWS}/support/sdx/gen_sdx_platform_project.tcl
+${XSCT} ${PROJWS}/support/sdx/minized/gen_sdx_platform_project.tcl
 
 P_PRINT ${ME} "Exiting\n"

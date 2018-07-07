@@ -31,7 +31,7 @@ then
 fi
 mkdir -p "${PROJ_SDX_APP_PROJECT_PATH}"
 
-tar -xzf ${PROJ_SDX_SUPPORT_PATH}/sdx_application_project_template.tar.gz -C ${PROJ_SDX_APP_PROJECT_PATH}
+tar -xzf ${PROJ_SDX_SUPPORT_PATH}/minized/sdx_application_project_template.tar.gz -C ${PROJ_SDX_APP_PROJECT_PATH}
 
 # Now fixup the pathing in the project files to work on the local
 # machine

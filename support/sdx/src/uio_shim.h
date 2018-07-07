@@ -2,7 +2,7 @@
 #define UIO_SHIM_H
 
 #include <errno.h>
-#include <getopt.h>
+//#include <getopt.h>
 #include <inttypes.h>
 #include <stdio.h>
 #include <fcntl.h>
@@ -10,7 +10,7 @@
 #include <stdint.h>
 #include <unistd.h>
 #include <sys/mman.h>
-#include <sys/timeb.h>
+//#include <sys/timeb.h>
 
 struct uio_shim_t {
 
@@ -32,7 +32,7 @@ struct uio_shim_t {
 };
 
 
-int uio_shim_init (struct uio_shim_t* uio_shim);
+int uio_shim_init (struct uio_shim_t* uio_shim, const char* dev_path, size_t length);
 int uio_shim_free (struct uio_shim_t* uio_shim);
 
 int uio_shim_read (struct uio_shim_t* uio_shim, uint32_t offset, uint32_t* read_data);

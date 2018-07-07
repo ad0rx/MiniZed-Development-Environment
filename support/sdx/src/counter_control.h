@@ -74,6 +74,8 @@ using namespace std;
 #define COUNTER_RATE   0x00000010 /* Count Rate register            */
 #define COUNTER_INIT   0x00000014 /* Initial Counter Value register */
 
+#define COUNTER_DEV_PATH "/dev/uio0"
+
 class counter_control {
 
 	struct uio_shim_t* uio_shim;
@@ -86,17 +88,15 @@ public:
 
 		// Allocate memory for the shim object
 		uio_shim = (struct uio_shim_t*) calloc(1, sizeof(struct uio_shim_t));
-		if (!uio_shim) {
+		if (!uio_shim)
+		{
 			printf("Failed to allocate memory for uio_shim\n");
 			exit(1);
 		}
 
-		// Setup the uio_shim object configuration
-		uio_shim->dev_path = "/dev/uio0";
-		uio_shim->length = 0x10000u;
-
-		// Initialize the uio_shim driver
-		if (uio_shim_init(uio_shim)) {
+		// Initialize the uio_shim driver and uio_shim object
+		if (uio_shim_init(uio_shim, COUNTER_DEV_PATH, 0x10000u))
+		{
 			printf("Failed to initaialize uio_shim driver\n");
 			exit(1);
 		}

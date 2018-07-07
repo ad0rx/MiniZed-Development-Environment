@@ -5,7 +5,15 @@
 # system. The way to use it is to build a sdx application project from
 # scratch, configure the project as needed and then exit SDX and run
 # this script. THen commit the resulting sdx project to git repo
-
+#
+# Things to setup
+# build with 4 cores
+# sources linked
+# font
+# tcf agent
+# window layout
+# debug as
+#
 . ${PROJWS}/bin/setup.sh
 
 #TEMPLATE_PROJECT=${PROJ_SDX_APP_PROJECT_PATH}

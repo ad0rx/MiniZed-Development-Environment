@@ -37,7 +37,11 @@ KEYS_INSTALL=/home/root/.ssh
 if [ -e "${AUTHORIZED_KEYS}" ]
 then
     echo "Copying authorized_keys from ${AUTHORIZED_KEYS}"
-    mkdir -m 700 ${KEYS_INSTALL}
+
+    if [ ! -e ${KEYS_INSTALL} ]
+    then
+        mkdir -m 700 ${KEYS_INSTALL}
+    fi
     cp "${AUTHORIZED_KEYS}" ${KEYS_INSTALL}
     chmod 600 ${KEYS_INSTALL}/authorized_keys
 fi
@@ -59,16 +63,10 @@ then
     /sbin/ifconfig wlan0 192.168.1.16
 fi
 
-if ping -c1 -W1 google.com
+if ping -c1 -W1 google.com > /dev/null
 then
     #green LED on
     devmem 0xe000a044 32 0x002cff00
-
-    # Try to set date from Google
-    date -s "$(wget -qSO- --max-redirect=0 google.com 2>&1 | grep Date: | cut -d' ' -f5-8)Z"
-
-
-    
 else
     #red LED on
     devmem 0xe000a044 32 0x001cff00

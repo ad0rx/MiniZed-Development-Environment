@@ -47,18 +47,18 @@ then
         rm -rf "${PROJ_SSH_PATH}"
     fi
 
-    P_PRINT ${ME} "Creating ${PROJ_SSH_PATH}"
+    #P_PRINT ${ME} "Creating ${PROJ_SSH_PATH}"
     mkdir -m=700 "${PROJ_SSH_PATH}"
     touch "${PROJ_SSH_PATH}/known_hosts"
 
-    P_PRINT ${ME} "Creating key pair"
+    #P_PRINT ${ME} "Creating key pair"
     ssh-keygen -q -f "${PROJ_SSH_PATH}/id_rsa" -P ""
 
     # Create authorized_keys to be used by board
     cp "${PROJ_SSH_PATH}/id_rsa.pub" ${AUTHORIZED_KEYS}
 
     # Create host id to be used by the board
-    P_PRINT ${ME} "Creating host key for board"
+    #P_PRINT ${ME} "Creating host key for board"
     rm -f ${HOST_ID_FILE}
     ssh-keygen -q -f ${HOST_ID_FILE} -P ""
 
@@ -69,26 +69,26 @@ then
     ssh-copy-id -o UserKnownHostsFile="${PROJ_SSH_PATH}/known_hosts" -i "${PROJ_SSH_PATH}/id_rsa" root@${MZ_IP}
 
     # Make sure the de directory exists, create if needed
-    P_PRINT ${ME} "Creating de directory on board"
+    #P_PRINT ${ME} "Creating de directory on board"
     ${DE_SSH} mkdir -p /mnt/emmc/de
 
     # Copy authorized_keys to board
-    P_PRINT ${ME} "Copying authorized_keys to the board"
+    #P_PRINT ${ME} "Copying authorized_keys to the board"
     scp ${DE_SSH_OPTIONS} -i ${PROJ_SSH_PATH}/id_rsa ${AUTHORIZED_KEYS} root@$MZ_IP:/mnt/emmc/de/
 
     # Copy host id to board
-    P_PRINT ${ME} "Copying host id to the board"
+    #P_PRINT ${ME} "Copying host id to the board"
     scp ${DE_SSH_OPTIONS} -i ${PROJ_SSH_PATH}/id_rsa ${HOST_ID_FILE} root@$MZ_IP:/mnt/emmc/de/
 
     # Copy user_init.sh to board
-    P_PRINT ${ME} "Copying user init script to the board"
+    #P_PRINT ${ME} "Copying user init script to the board"
     scp ${DE_SSH_OPTIONS} -i ${PROJ_SSH_PATH}/id_rsa ${USER_INIT_SH} root@$MZ_IP:/mnt/emmc/de/
 
     # Sync writes to flash
     ${DE_SSH} /bin/sync
 
     # Run user_init.sh on board
-    P_PRINT ${ME} "Running user init script"
+    #P_PRINT ${ME} "Running user init script"
     ${DE_SSH} /mnt/emmc/de/user_init.sh
 
     # Restart Dropbear

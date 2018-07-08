@@ -74,7 +74,7 @@ The following steps explain how to use this environment to build everything requ
    - replace occurances of 'myhostname' with the host name of your machine as reported by 'hostname'
    - edit the path to tool settings.sh to match your local environment
    - set the IP address of your MiniZed in the MZ_IP variable (optional)
-  
+     - also set IP address in support/petalinux/minized/user_init.sh to match
 1. Source the bin/setup.sh file
    ```sh
    > . bin/setup

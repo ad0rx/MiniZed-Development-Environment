@@ -109,5 +109,10 @@ cp    ${PROJWS}/support/petalinux/minized/sdx_pfm.bif   \
 # Put board into JTAG boot mode
 #cd {$PROJWS}/${PETALINUX_PROJECT_NAME} && petalinux-boot --jtag --hw_server-url 192.168.1.21:3121 --fpga --kernel
 
+# Package BOOT.BIN in case user wants to just boot petalinux without SDSoC project
+pushd ${PETALINUX_PROJECT_NAME}/images/linux
+petalinux-package --boot --fsbl zynq_fsbl.elf --fpga minized_petalinux_wrapper.bit --u-boot u-boot.elf --force
+popd
+
 P_PRINT ${ME} "Exiting\n"
 

@@ -25,6 +25,6 @@ FILES_TO_UPLOAD="${PROJ_SDX_APP_PROJECT_PATH}/mz_stream_petalinux/Debug/sd_card/
 FILES_TO_UPLOAD+=" ${PROJ_SDX_APP_PROJECT_PATH}/mz_stream_petalinux/Debug/sd_card/image.ub"
 FILES_TO_UPLOAD+=" ${PROJ_SDX_APP_PROJECT_PATH}/mz_stream_petalinux/Debug/sd_card/mz_stream_petalinux.elf"
 
-scp ${MZ_SSH_OPTIONS} -i ${PROJ_SSH_PATH}/id_rsa ${FILES_TO_UPLOAD} root@${MZ_IP}:/mnt/emmc
+scp ${DE_SSH_OPTIONS} -i ${PROJ_SSH_PATH}/id_rsa ${FILES_TO_UPLOAD} root@${MZ_IP}:/mnt/emmc
 
 P_PRINT ${ME} "Exiting\n"

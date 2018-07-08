@@ -4,7 +4,7 @@
 #
 
 # Can't do this because this file gets sourced from various other
-# places. Must set PROJWS before calling this
+# places. Must set PROJWS before sourcing this script
 #export PROJWS=$(pwd)
 
 if [ -z ${PROJWS} ]
@@ -35,8 +35,8 @@ P_PRINT(){
 }
 export -f P_PRINT
 
-# Machine specific settings, leave bubba alone and just create your
-# own section
+# Machine specific settings, leave bubba and edit the else clause as your
+# local configuration
 HOSTNAME=$(hostname)
 #echo $HOSTNAME
 if [ "$HOSTNAME" = "bubba" ]
@@ -61,6 +61,7 @@ else if [ "$HOSTNAME" = "myhostname" ]
          P_PRINT "setup.sh" "Applying Environment Settings for myhostname"
          
          # IP of the MiniZed
+         # Try to use this IP as it is currently hard coded in some support scripts such as user_init.sh
          export MZ_IP=192.168.1.16         
          export PROJ_NUM_CPU=4
          PETALINUX_SETTINGS=<>/2017.4/settings.sh

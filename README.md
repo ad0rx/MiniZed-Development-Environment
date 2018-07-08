@@ -132,4 +132,4 @@ The following steps explain how to use this environment to build everything requ
    
 1. Congratulations, you now have one of the most powerful SoC development tools at your command, please enjoy responsibly!
 
-   If you have expertise, or are interested in learning, please consider taking on one or more of the tasks in the Future Goals section, I'd really appreciate your help! Also, please let me know if there are things that could be done better!
+   If you have expertise, or are interested in learning, please consider taking on one or more of the tasks in the Future Goals section, I'd really appreciate your help! Also, please let me know if there are things that could be done better.

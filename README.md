@@ -29,7 +29,9 @@ The culminating capability of this project is the ability to start developing a 
 1. PetaLinux Distribution Project
    1. UIO Driver link to AXI Counter IP
 1. SDSoC Platform Project
+1. SDSoC Application Project
    1. Streaming IO Application (DMA) with UIO API to custom hardware control registers
+   1. Running bin/top.sh will end with this project open in SDSoC, ready for development
    
 By running the scripts, you will be able to choose any area of interest and not have to start from scratch, and this enables you to focus on what matters to you today. If you are interested in seeing how the projects are architected, the information is contained in the included Bash and Tcl scripts.  
 

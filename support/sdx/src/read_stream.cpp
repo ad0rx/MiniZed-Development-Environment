@@ -17,6 +17,7 @@
 **    any errors, which may appear in this code, nor does it make a commitment
 **    to update the information contained herein. Avnet, Inc specifically
 **    disclaims any implied warranties of fitness for a particular purpose.
+**
 **                     Copyright(c) 2018 Avnet, Inc.
 **                             All rights reserved.
 **
@@ -32,6 +33,8 @@
 **                      access by SDSoC application.
 **
 ** Revision:            Feb 25, 2018: 1.00 Initial version
+**                      Jul 09, 2018: 1.10 Updated to read a variable amount of
+**                                         data from the stream buffer
 **
 **----------------------------------------------------------------------------*/
 
@@ -53,80 +56,25 @@
 **   None
 *******************************************************************************/
 void read_stream( uint32_t *p_stream,
-                  uint32_t  p_init_value,
-                  uint32_t  p_flush,
-                  uint32_t *p_buffer )
+                  uint32_t *p_buffer,
+                  uint32_t  p_samples)
 {
 #pragma HLS dataflow
 
   /*
   ** Variables
   */
-  int      c;                      /* Local counter */
-  bool     init_found;             /* Initial value found flag */
-  uint32_t l_flush;                /* Local copy of p_flush input flag */
-  uint32_t l_init_value;           /* Local copy of p_init_value input */
-  uint32_t l_buffer[BUFFER_DEPTH]; /* Local buffer for storing data */
-  uint32_t temp;                   /* Temp variable */
+  uint32_t temp; /* Temp variable */
 
   /*
-  ** Initialize variables
+  ** Read data from the PL FIFO and write to memory pointed to by p_buffer input.
   */
-  c            = 0;
-  init_found   = false;
-  l_flush      = p_flush;
-  l_init_value = p_init_value;
-
-  /*
-  ** Read data from the PL FIFO and copy to local memory.  If we are flushing
-  ** the data-path then look for the first sample value and throw away values
-  ** that do not match.  After a match is found start copying every sample
-  ** from the PL FIFO.
-  */
-  for (int i = 0; i < 2*BUFFER_DEPTH; i++)
+  for (uint32_t i = 0; i < p_samples; i++)
   {
 #pragma HLS pipeline
-#pragma HLS loop_tripcount max=8192
-
-    if (c == BUFFER_DEPTH)
-    {
-      break;
-    }
-
-    if (l_flush == 0)
-    {
-      l_buffer[c] = *p_stream;
-      c++;
-    }
-    else
-    {
-      if (init_found)
-      {
-        l_buffer[c] = *p_stream;
-        c++;
-      }
-      else
-      {
-        temp = *p_stream;
-
-        if (temp == l_init_value)
-        {
-          init_found = true;
-          l_buffer[c] = temp;
-          c++;
-        }
-      }
-    }
-  }
-
-  /*
-  ** Copy data from local-buffer to output
-  */
-  for (int i = 0; i < BUFFER_DEPTH; i++)
-  {
-#pragma HLS pipeline
-#pragma HLS loop_tripcount max=4096
-    p_buffer[i] = l_buffer[i];
+#pragma HLS loop_tripcount min=4096 max=5122
+    temp = *p_stream;
+    p_buffer[i] = temp;
   }
 
 }

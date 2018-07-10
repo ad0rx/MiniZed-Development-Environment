@@ -3,12 +3,12 @@
 #define DEFAULT_WIDTH     4
 
 int uio_shim_init (struct uio_shim_t* uio_shim,
-		const char* dev_path,
-		size_t length) {
+    const char* dev_path,
+    size_t length) {
 
-	// Initialize the shim object
-	uio_shim->dev_path = dev_path;
-	uio_shim->length   = length;
+  // Initialize the shim object
+  uio_shim->dev_path = dev_path;
+  uio_shim->length   = length;
 
   uio_shim->fd = open(uio_shim->dev_path, O_RDWR|O_SYNC);
   if (uio_shim->fd < 1) {

@@ -56,7 +56,7 @@ The following steps explain how to use this environment to build everything requ
 
 1. Clone the repo
    ```sh
-   > git clone https://github.com/ad0rx/mz_stream_petalinux_2017.4.git mz_stream_petalinux --depth 1
+   > git clone https://github.com/ad0rx/minized-development-environment.git mz_stream_petalinux --depth 1
    ```
 
 1. If you are going to develop with intent to submit patches back to master branch, 

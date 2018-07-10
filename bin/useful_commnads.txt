@@ -4,6 +4,9 @@ ssh -t root@192.168.1.16 /mnt/emmc/update.sh
 
 petalinux-package --boot --fsbl images/linux/zynq_fsbl.elf --fpga images/linux/minized_petalinux_wrapper.bit --u-boot images/linux/u-boot.elf --force
 
+# Run local script on remote host
+derun bin/remote/program_qspi.sh
+
 # Git
 Centralized Workflow model for now.
 https://www.atlassian.com/git/tutorials/comparing-workflows#centralized-workflow

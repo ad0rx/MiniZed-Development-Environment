@@ -17,6 +17,7 @@
 **    any errors, which may appear in this code, nor does it make a commitment
 **    to update the information contained herein. Avnet, Inc specifically
 **    disclaims any implied warranties of fitness for a particular purpose.
+**
 **                     Copyright(c) 2018 Avnet, Inc.
 **                             All rights reserved.
 **
@@ -30,6 +31,8 @@
 ** Description:         MiniZed AXI-Stream Example Header File
 **
 ** Revision:            Feb 25, 2018: 1.00 Initial version
+**                      Jul 09, 2018: 1.10 Updated to use non-blocking HW
+**                                         function calls
 **
 **----------------------------------------------------------------------------*/
 
@@ -86,7 +89,6 @@ void mz_axi_stream()
   bool            success;
   stats_t         buff_stats;
   uint64_t        cycles;
-  uint32_t        flush_flag;
   float           read_time;
 
   /*
@@ -98,10 +100,10 @@ void mz_axi_stream()
   }
 
   /*
-  ** Allocate stream buffer - not really necessary since the stream buffer is in
-  ** programmable logic, but defined here for totality.
+  ** Allocate stream buffer - not necessary since the stream buffer is in
+  ** programmable logic, so just set to NULL.
   */
-  input_stream = (uint32_t *)sds_alloc( BUFFER_DEPTH * sizeof(uint32_t) );
+  input_stream = NULL;
 
   /*
   ** Program loop
@@ -113,16 +115,13 @@ void mz_axi_stream()
     */
     cout << "Please select the initial counter value between 0 and 2147483647" << endl;
     cin  >> init_value;
-    cout << init_value << endl;
 
     cout << "Please select a counter increment value between 1 and 1023" << endl;
     cin  >> increment;
-    cout << increment << endl;
 
     cout << "Please select a counter update rate between 1 and 1023" << endl;
     cout << "  1 = 75 MHz update, 2 = 37.5 MHz update, ... , 1023 = 73.314 KHz update" << endl;
     cin  >> rate;
-    cout << rate << endl;
 
     /*
     ** Setup the counter by
@@ -131,13 +130,13 @@ void mz_axi_stream()
     **  3) setting rate, increment, and initial value registers
     **  4) enabling it
     */
-    cout << "Disabling Counter" << endl;
+    cout << "Disabling counter" << endl;
     counter.disable();
 
-    cout << "Clearing Counter" << endl;
+    cout << "Clearing counter" << endl;
     counter.clear();
 
-    cout << "Configuring Counter" << endl;
+    cout << "Configuring counter" << endl;
     success = counter.config( increment, rate, init_value );
 
     if (!success)
@@ -154,36 +153,45 @@ void mz_axi_stream()
     */
     if (!first_run)
     {
-      /* buffer should be full, perform read to clear */
+      /*
+      ** buffer should be full (plus additional 1026 words for data movement logic),
+      ** perform read to clear
+      */
       cout << "Flushing buffer" << endl;
-      flush_flag = 1;
-      read_stream(input_stream, init_value, 0, ps_buffer[0]);
-
-      /* Enable counter and set flush flag to clear any remaining data in the interface logic */
-      cout << "Enabling Counter" << endl;
-      counter.enable();
+      read_stream(input_stream, ps_buffer[0], BUFFER_DEPTH+DM_DEPTH);
     }
     else
     {
-      cout << "Enabling Counter" << endl;
       first_run = false;
-      flush_flag = 0;
-      counter.enable();
     }
 
     /*
-    ** Read the input data stream and copy to buffers allocated in DDR memory
+    ** Read the input data stream and copy to buffers allocated in DDR memory.
+    ** Kick off the HW function before enabling the counter in order to make sure
+    ** data can be read from the stream buffer as soon as it is available.
     */
-    cycles = sds_clock_counter();
+#pragma SDS async(1)
+    read_stream(input_stream, ps_buffer[0], BUFFER_DEPTH);
 
-    read_stream(input_stream, init_value, flush_flag, ps_buffer[0]);
+    /* Enable the counter */
+    cout << "Enabling counter" << endl;
+    counter.enable();
+
+    cycles = sds_clock_counter();
 
     for( int i = 1; i < NUM_BUFFERS; i++ )
     {
-      read_stream(input_stream, init_value, 0, ps_buffer[i]);
+#pragma SDS async(1)
+      read_stream(input_stream, ps_buffer[i], BUFFER_DEPTH);
+    }
+
+    for (int i = 0; i < NUM_BUFFERS; i++)
+    {
+#pragma SDS wait(1)
     }
 
     cycles = sds_clock_counter() - cycles;
+
     read_time = (float)cycles / (float)(sds_clock_frequency()) * 1.0e6f;
     cout << "It took " << read_time << " microseconds to read " << NUM_BUFFERS*BUFFER_DEPTH << " samples" << endl;
 
@@ -198,7 +206,7 @@ void mz_axi_stream()
 
     if (buff_stats.total_errors == 1)
     {
-      cout << "There was " << buff_stats.total_errors << " error detected in the buffer." << endl;
+      cout << "There was 1 error detected in the buffer." << endl;
     }
     else
     {
@@ -210,23 +218,41 @@ void mz_axi_stream()
       lf_print_debug( ps_buffer, buff_stats, increment, BUFFER_DEPTH, NUM_BUFFERS );
     }
 
-    cout << endl << "Would you like to run a new test [y or n]?" << endl;
-    cin  >> run_again;
-    cout << run_again << endl;
+    /*
+    ** Query the user to see if they want to run the test again.
+    */
+    while (1)
+    {
+      cout << endl << "Would you like to run a new test [y or n]?" << endl;
+      cin  >> run_again;
+
+      if (!strcmp(&run_again[0], "n") || !strcmp(&run_again[0], "y"))
+      {
+        break;
+      }
+      else
+      {
+        cout << "Input " << run_again << " not recognized, valid inputs are y or n." << endl;
+      }
+    }
 
     /*
     ** Terminate the program and release memory
     */
     if (!strcmp(&run_again[0], "n"))
     {
+      cout << "Disabling counter" << endl;
+      counter.disable();
+
+      cout << "Flushing buffer" << endl;
+      read_stream(input_stream, ps_buffer[0], BUFFER_DEPTH+DM_DEPTH);
+
       cout << "Terminating program" << endl;
 
       for (int i = 0; i < NUM_BUFFERS; i++)
       {
         sds_free(ps_buffer[i]);
       }
-
-      sds_free(input_stream);
 
       break;
     }
@@ -313,4 +339,5 @@ void lf_print_debug( uint32_t **p_buffer,
     cout << "    Expected last sample = " << p_buffer[i][0] + p_count_incr*(p_buffer_depth - 1) << endl;
     cout << "    Error count          = " << p_buff_stats.buff_errors[i] << endl;
   }
+
 }

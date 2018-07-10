@@ -16,7 +16,7 @@ then
 fi
 
 # Source the setup file
-. ${PROJWS}/bin/setup.sh
+#. ${PROJWS}/bin/setup.sh
 . ${PROJWS}/bin/setup_ssh.sh
 
 P_PRINT ${ME} "Running\n"

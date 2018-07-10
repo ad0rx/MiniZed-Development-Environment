@@ -125,6 +125,7 @@ The following steps explain how to use this environment to build everything requ
    ```sh
    > derun ${PROJWS}/bin/remote/program_qspi.sh
    ```
+   - The command above automatically programs QSPI and reboots the board
 
 1. Run the Application
    ```sh

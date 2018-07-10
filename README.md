@@ -103,14 +103,14 @@ The following steps explain how to use this environment to build everything requ
    
 1. Deploy Files to MiniZed
 
-   - The following steps assume that the board has booted into Linux, the wifi.sh script has been executed on the board, and you have set the IP of the board in bin/setup.sh MZ_IP variable. Once you source the bin/setup_ssh.sh file, the mzssh command will be available to you and allows you to log into the board without having to provide an interactive password. The bin/setup_ssh.sh file configures public key authentication. You will be asked to connect to the board only once per board reboot.
+   1. The following steps assume that the board has booted into Linux, the wifi.sh script has been executed on the board, and you have set the IP of the board in bin/setup.sh MZ_IP variable. Once you source the bin/setup_ssh.sh file, the mzssh command will be available to you and allows you to log into the board without having to provide an interactive password. The bin/setup_ssh.sh file configures public key authentication. You will be asked to connect to the board only once per board reboot.
 
    1. Source the SSH setup file
       ```sh
       > . bin/setup_ssh.sh
       ```
 
-   - Once you have built the SDSoC Application Project, there will be files in the sd_card directory that must be uploaded to the board. These files are located at ${PROJWS}/work/sdx_application_project/mz_stream_petalinux/Debug/sd_card
+   1. Once you have built the SDSoC Application Project, there will be files in the sd_card directory that must be uploaded to the board. These files are located at ${PROJWS}/work/sdx_application_project/mz_stream_petalinux/Debug/sd_card
 
      1. BOOT.BIN
      1. image.ub

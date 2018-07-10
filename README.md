@@ -123,13 +123,12 @@ The following steps explain how to use this environment to build everything requ
 
 1. Program BOOT.BIN into QSPI and reboot the board
    ```sh
-   > mzssh /usr/sbin/flashcp /mnt/emmc/BOOT.BIN /dev/mtd0
-   > mzssh /sbin/reboot
+   > derun ${PROJWS}/remote/program_qspi.sh
    ```
 
 1. Run the Application
    ```sh
-   > mzssh /mnt/emmt/mz_stream_petalinux.elf
+   > dessh /mnt/emmt/mz_stream_petalinux.elf
    ```
    
 1. Congratulations, you now have one of the most powerful SoC development tools at your command, please enjoy responsibly!

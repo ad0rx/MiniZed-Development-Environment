@@ -123,7 +123,7 @@ The following steps explain how to use this environment to build everything requ
 
 1. Program BOOT.BIN into QSPI and reboot the board
    ```sh
-   > derun ${PROJWS}/remote/program_qspi.sh
+   > derun ${PROJWS}/bin/remote/program_qspi.sh
    ```
 
 1. Run the Application

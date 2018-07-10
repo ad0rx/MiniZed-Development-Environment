@@ -112,9 +112,9 @@ The following steps explain how to use this environment to build everything requ
 
    1. Once you have built the SDSoC Application Project, there will be files in the sd_card directory that must be uploaded to the board. These files are located at ${PROJWS}/work/sdx_application_project/mz_stream_petalinux/Debug/sd_card
 
-     1. BOOT.BIN
-     1. image.ub
-     1. mz_stream_petalinux.elf
+      1. BOOT.BIN
+      1. image.ub
+      1. mz_stream_petalinux.elf
      
    1. Upload files to MiniZed
       ```sh

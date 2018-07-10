@@ -129,7 +129,7 @@ The following steps explain how to use this environment to build everything requ
 
 1. Run the Application
    ```sh
-   > dessh /mnt/emmt/mz_stream_petalinux.elf
+   > dessh /mnt/emmc/mz_stream_petalinux.elf
    ```
    
 1. Congratulations, you now have one of the most powerful SoC development tools at your command, please enjoy responsibly!

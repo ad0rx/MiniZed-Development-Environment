@@ -1,0 +1,31 @@
+#!/bin/bash
+#
+# Run commands contained in file on the dev board
+#
+
+ME="derun"
+
+if [ -z ${PROJWS} ]
+then
+    echo "Environment variable PROJWS is not set and script cannot continue"
+    echo "Please set this variable to the path to where we can work"
+    echo "an example is: export PROJWS=/home/${USER}/myproj"
+    echo "Exiting..."
+fi
+
+if [ -z "$1" ]
+then
+    echo "derun: Run commands contained in local file"
+    echo "       on the dev board"
+    echo "USAGE: derun <SCRIPT_TO_EXECUTE>"
+    echo
+    exit 1
+fi
+
+# Source the setup file if needed
+if [ -z "$DE_SSH" ]
+then
+    . ${PROJWS}/bin/setup_ssh.sh
+fi
+
+cat "$1" | ${DE_SSH} 'bash --login -s'

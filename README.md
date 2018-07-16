@@ -7,6 +7,7 @@
 * Quick start for any project targeting Avnet MiniZed SoC development board
 * Demonstrate how to automate Xilinx tool flows and common support tasks
 * Demonstrate how to use revision control for large projects by tracking only source code and build scripts
+* Build an SDSoC application, from scratch, without ever opening a GUI
 
 # Future Goals
 * Add PetaLinux examples
@@ -19,10 +20,9 @@
   * Xilinx
     1. ZC702
     1. ZCU102    
-* Convert Bash scripts to Perl to enable Windows users to take advantages of pieces of this project    
 
 # Summary
-The culminating capability of this project is the ability to start developing a Xilinx SDSoC application, with streaming IO (DMA) and a practical hardware reference design. This project provides a collection of scripts and supporing files which enable you to quickly develop applications for the Avnet MiniZed development board. The current automation supports generation of the following:
+The culminating capability of this project is the ability to start developing a Xilinx SDSoC application, with streaming IO (DMA), and a practical hardware reference design. This project also contains a collection of scripts and supporing files which enable you to quickly develop applications for the Avnet MiniZed development board. The current automation supports generation of the following:
 
 1. Vivado Hardware Project
    1. Custom AXI Counter IP example (VHDL)
@@ -31,7 +31,6 @@ The culminating capability of this project is the ability to start developing a 
 1. SDSoC Platform Project
 1. SDSoC Application Project
    1. Streaming IO Application (DMA) with UIO API to custom hardware control registers
-   1. Running bin/top.sh will end with this project open in SDSoC, ready for development
    
 By running the scripts, you will be able to choose any area of interest and not have to start from scratch, and this enables you to focus on what matters to you today. If you are interested in seeing how the projects are architected, the information is contained in the included Bash and Tcl scripts.  
 
@@ -41,10 +40,11 @@ Although this project targets the Avnet MiniZed, the concepts transfer to just a
 
 # Prerequisites
 
-1. Xilinx SDx 2017.4 
-   - Includes Vivado
-   
-1. PetaLinux 2017.4 
+1. Linux Environment* with the following tools installed:
+   1. Xilinx SDx 2017.4 
+      - Includes Vivado
+   1. PetaLinux 2017.4
+   \* Ubuntu 16.04 LTS Recommended
 
 1. Licenses sufficient to target XC7Z007S part
 
@@ -79,7 +79,7 @@ The following steps explain how to use this environment to build everything requ
      - also set IP address in support/petalinux/minized/user_init.sh to match
 1. Source the bin/setup.sh file
    ```sh
-   > . bin/setup
+   > . bin/setup.sh
    ```
 
 1. Run the top level script which will build everything required by the final
@@ -95,11 +95,6 @@ The following steps explain how to use this environment to build everything requ
      > gen_sdx_platform_project.sh
      > gen_sdx_application_project.sh
      ```
-   - Once the gen_sdx_application_project.sh script completes, SDSoC will automatically open
-   
-1. Build the SDSoC Application
-
-   - Project -> Build All or CTRL+B
    
 1. Deploy Files to MiniZed
 
@@ -136,4 +131,4 @@ The following steps explain how to use this environment to build everything requ
    
 1. Congratulations, you now have one of the most powerful SoC development tools at your command, please enjoy responsibly!
 
-   If you have expertise, or are interested in learning, please consider taking on one or more of the tasks in the Future Goals section, I'd really appreciate your help! Also, please let me know if there are things that could be done better.
+   If you have expertise, or are interested in learning, please consider taking on a task in the Future Goals section, I'd really appreciate your help! Also, please let me know if there are things that could be done better.

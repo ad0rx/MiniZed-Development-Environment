@@ -43,7 +43,12 @@ grep -rl "\<PROJ_SDX_APP_PROJECT_PATH\>" ${PROJ_SDX_APP_PROJECT_PATH} | xargs se
 cp ${PROJ_SDX_SUPPORT_PATH}/src/mz_header.h     ${PROJ_SDX_APP_PROJECT_PATH}/mz_stream_petalinux/src/
 cp ${PROJ_SDX_SUPPORT_PATH}/src/read_stream.cpp ${PROJ_SDX_APP_PROJECT_PATH}/mz_stream_petalinux/src/
 
-$SSDX
-sdx -workspace "${PROJ_SDX_APP_PROJECT_PATH}"
+# The following commands will open the SDx GUI
+#$SSDX
+#sdx -workspace "${PROJ_SDX_APP_PROJECT_PATH}"
+
+# The following commands will automaticall build the SDx project
+cd "${PROJ_SDX_APP_PROJECT_PATH}/mz_stream_petalinux/Debug"
+make -j4 pre-build main-build
 
 P_PRINT ${ME} "Exiting\n"

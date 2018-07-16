@@ -52,7 +52,7 @@ Although this project targets the Avnet MiniZed, the concepts transfer to just a
 
 The following steps explain how to use this environment to build everything required to run a SDSoC application on the MiniZed board.
 
-1. cd to a place where you have 20GB available
+1. cd to a place where you have 8GB available
 
 1. Clone the repo
    ```sh

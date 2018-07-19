@@ -44,12 +44,12 @@ cp ${PROJ_SDX_SUPPORT_PATH}/src/mz_header.h     ${PROJ_SDX_APP_PROJECT_PATH}/mz_
 cp ${PROJ_SDX_SUPPORT_PATH}/src/read_stream.cpp ${PROJ_SDX_APP_PROJECT_PATH}/mz_stream_petalinux/src/
 
 # The following commands will open the SDx GUI
-#$SSDX
+#${SSDX}
 #sdx -workspace "${PROJ_SDX_APP_PROJECT_PATH}"
 
-# The following commands will automaticall build the SDx project
+# The following commands will automatically build the SDSoC project
 cd "${PROJ_SDX_APP_PROJECT_PATH}/mz_stream_petalinux/Debug"
-$SSDX
-make -j4 pre-build main-build
+${SSDX}
+make -j${PROJ_NUM_CPU} pre-build main-build
 
 P_PRINT ${ME} "Exiting\n"

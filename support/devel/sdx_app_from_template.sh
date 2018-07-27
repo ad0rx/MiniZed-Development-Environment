@@ -51,6 +51,7 @@ find ${TEMPORARY_PROJECT} -name "read_stream.cpp" -print0 | xargs -0 rm -f
 # Replace paths specific to local machine with markers that will be used by gen_sdx_app_project.sh
 grep -rl ${PROJ_SDX_PFM_PROJECT_PATH} ${TEMPORARY_PROJECT} | xargs sed -i "s:${PROJ_SDX_PFM_PROJECT_PATH}:\<PROJ_SDX_PFM_PROJECT_PATH\>:g"
 grep -rl ${PROJ_SDX_APP_PROJECT_PATH} ${TEMPORARY_PROJECT} | xargs sed -i "s:${PROJ_SDX_APP_PROJECT_PATH}:\<PROJ_SDX_APP_PROJECT_PATH\>:g"
+grep -rl ${PROJ_SDX_SUPPORT_PATH}     ${TEMPORARY_PROJECT} | xargs sed -i "s:${PROJ_SDX_SUPPORT_PATH}:\<PROJ_SDX_SUPPORT_PATH\>:g"
 
 echo "creating tarball"
 rm -rf ${FINAL_TARBALL}

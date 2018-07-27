@@ -37,6 +37,7 @@ tar -xzf ${PROJ_SDX_SUPPORT_PATH}/minized/sdx_application_project_template.tar.g
 # machine
 grep -rl "\<PROJ_SDX_PFM_PROJECT_PATH\>" ${PROJ_SDX_APP_PROJECT_PATH} | xargs sed -i "s:<PROJ_SDX_PFM_PROJECT_PATH>:${PROJ_SDX_PFM_PROJECT_PATH}:g"
 grep -rl "\<PROJ_SDX_APP_PROJECT_PATH\>" ${PROJ_SDX_APP_PROJECT_PATH} | xargs sed -i "s:<PROJ_SDX_APP_PROJECT_PATH>:${PROJ_SDX_APP_PROJECT_PATH}:g"
+grep -rl "\<PROJ_SDX_SUPPORT_PATH\>"     ${PROJ_SDX_APP_PROJECT_PATH} | xargs sed -i "s:<PROJ_SDX_SUPPORT_PATH>:${PROJ_SDX_SUPPORT_PATH}:g"
 
 # Copy over the files that are not linked in SDx project so that the
 # user does not get stale versions

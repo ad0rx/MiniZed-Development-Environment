@@ -13,68 +13,69 @@ then
     echo "Please set this variable to the path to where we can work"
     echo "an example is: export PROJWS=/home/${USER}/myproj"
     echo "Exiting..."
-fi
+else
 
-export PATH="${PROJWS}/bin:${PATH}"
+    export PATH="${PROJWS}/bin:${PATH}"
 
-# Path to the work directory. Under this dir will be all the
-# script-generated projects
-export PROJ_WORK="${PROJWS}/work"
-export PROJ_SUPPORT_PATH="${PROJWS}/support"
-export PROJ_AVNET_SUPPORT_PATH="${PROJ_SUPPORT_PATH}/avnet"
-export PROJ_SDX_SUPPORT_PATH="${PROJ_SUPPORT_PATH}/sdx"
-export PROJ_HW_PROJECT_PATH="${PROJ_WORK}/hardware_project"
-export PROJ_PLNX_PROJECT_PATH="${PROJ_WORK}/petalinux_project"
-export PROJ_SDX_PFM_PROJECT_PATH="${PROJ_WORK}/sdx_platform_project"
-export PROJ_SDX_APP_PROJECT_PATH="${PROJ_WORK}/sdx_application_project"
+    # Path to the work directory. Under this dir will be all the
+    # script-generated projects
+    export PROJ_WORK="${PROJWS}/work"
+    export PROJ_SUPPORT_PATH="${PROJWS}/support"
+    export PROJ_AVNET_SUPPORT_PATH="${PROJ_SUPPORT_PATH}/avnet"
+    export PROJ_SDX_SUPPORT_PATH="${PROJ_SUPPORT_PATH}/sdx"
+    export PROJ_HW_PROJECT_PATH="${PROJ_WORK}/hardware_project"
+    export PROJ_PLNX_PROJECT_PATH="${PROJ_WORK}/petalinux_project"
+    export PROJ_SDX_PFM_PROJECT_PATH="${PROJ_WORK}/sdx_platform_project"
+    export PROJ_SDX_APP_PROJECT_PATH="${PROJ_WORK}/sdx_application_project"
 
-export PROJ_SSH_PATH="${PROJWS}/.ssh"
+    export PROJ_SSH_PATH="${PROJWS}/.ssh"
 
-P_PRINT(){
-    echo -e "$1: $2"
-}
-export -f P_PRINT
+    P_PRINT(){
+        echo -e "$1: $2"
+    }
+    export -f P_PRINT
 
-# Machine specific settings, leave bubba and edit the else clause as your
-# local configuration
-HOSTNAME=$(hostname)
-#echo $HOSTNAME
-if [ "$HOSTNAME" = "bubba" ]
-then
+    # Machine specific settings, leave bubba and edit the else clause as your
+    # local configuration
+    HOSTNAME=$(hostname)
+    #echo $HOSTNAME
+    if [ "$HOSTNAME" = "bubba" ]
+    then
 
-    P_PRINT "setup.sh" "Applying Environment Settings for Bubba"
+        P_PRINT "setup.sh" "Applying Environment Settings for Bubba"
 
-    # IP of the MiniZed
-    export MZ_IP=192.168.1.16
-    export PROJ_NUM_CPU=4
-    PETALINUX_SETTINGS=/projects/xilinx_no_bkup/petalinux/2017.4/settings.sh
+        # IP of the MiniZed
+        export MZ_IP=192.168.1.16
+        export PROJ_NUM_CPU=4
+        PETALINUX_SETTINGS=/projects/xilinx_no_bkup/petalinux/2017.4/settings.sh
 
-    # Includes Vivado and XSDK
-    # The install on my machine looks goofy so heads-up, your path
-    # may have different form
-    SDX_SETTINGS=/projects/xilinx_no_bkup/SDx/SDx/2017.4/settings64.sh
-    export XSCT=/projects/xilinx_no_bkup/SDx/SDx/2017.4/bin/xsct
+        # Includes Vivado and XSDK
+        # The install on my machine looks goofy so heads-up, your path
+        # may have different form
+        SDX_SETTINGS=/projects/xilinx_no_bkup/SDx/SDx/2017.4/settings64.sh
+        export XSCT=/projects/xilinx_no_bkup/SDx/SDx/2017.4/bin/xsct
+        
+    else if [ "$HOSTNAME" = "myhostname" ]
+         then
+
+             P_PRINT "setup.sh" "Applying Environment Settings for myhostname"
+             
+             # IP of the MiniZed
+             # Try to use this IP as it is currently hard coded in some support scripts such as user_init.sh
+             export MZ_IP=192.168.1.16         
+             export PROJ_NUM_CPU=4
+             PETALINUX_SETTINGS=<>/2017.4/settings.sh
+
+             # Includes Vivado and XSDK
+             # The install on my machine looks goofy so heads-up, your path
+             # may have different form
+             SDX_SETTINGS=<>/SDx/2017.4/settings64.sh
+             export XSCT=<>/SDx/2017.4/bin/xsct
+
+         fi
+    fi
     
-else if [ "$HOSTNAME" = "myhostname" ]
-     then
+    export SSDX=". ${SDX_SETTINGS}"
+    export SP=". ${PETALINUX_SETTINGS}"
 
-         P_PRINT "setup.sh" "Applying Environment Settings for myhostname"
-         
-         # IP of the MiniZed
-         # Try to use this IP as it is currently hard coded in some support scripts such as user_init.sh
-         export MZ_IP=192.168.1.16         
-         export PROJ_NUM_CPU=4
-         PETALINUX_SETTINGS=<>/2017.4/settings.sh
-
-         # Includes Vivado and XSDK
-         # The install on my machine looks goofy so heads-up, your path
-         # may have different form
-         SDX_SETTINGS=<>/SDx/2017.4/settings64.sh
-         export XSCT=<>/SDx/2017.4/bin/xsct
-
-     fi
 fi
-    
-export SSDX=". ${SDX_SETTINGS}"
-export SP=". ${PETALINUX_SETTINGS}"
-

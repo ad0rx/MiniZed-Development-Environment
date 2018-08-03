@@ -29,7 +29,7 @@ read -n1 YN
 echo
 if [ ${YN} != 'Y' ]
 then
-    exit 0
+    exit 1
 fi
 
 if [ -e "${PROJ_WORK}" ]

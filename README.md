@@ -11,7 +11,7 @@
 
 # Future Goals
 * Add PetaLinux examples
-  1. Kernal char driver
+  1. Kernel char driver
 * Migrate to a generic environment that supports many Avnet and Xilinx boads
   * Avnet
     1. MicroZed
